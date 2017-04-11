@@ -1,9 +1,10 @@
 FROM php:5.6-apache
 
-		libapache2-mod-php5 \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
 		php-pear php5-apcu php5-cli php5-common php5-curl php5-gd php5-imagick \
 		php5-imap php5-intl php5-json php5-ldap php5-mongo php5-mysql php5-pgsql \
 		php5-readline php5-tidy php5-xdebug php5-xsl php5-dev php5-intl php5-apcu php-http \
+		libcurl4-openssl-dev libcurl3 libpcre3-dev make wget nano postgresql-client\
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN locale-gen en_US.UTF-8 \
