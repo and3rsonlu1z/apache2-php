@@ -1,6 +1,7 @@
 <VirtualHost *:80>
-    DocumentRoot /html
-    <Directory /html>
+    DocumentRoot /var/www/html
+    DirectoryIndex index.php
+    <Directory /var/www/html>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Order allow,deny

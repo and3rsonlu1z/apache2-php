@@ -1,9 +1,11 @@
 FROM ubuntu:trusty
 
-RUN mkdir /html
-#VOLUME ["/html"]
+RUN apt-get update \
+	&& apt-get install python-software-properties
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+RUN add-apt-repository ppa:ondrej/php5-5.6
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
 		libapache2-mod-php5 \
 		php-pear php5-apcu php5-cli php5-common php5-curl php5-gd php5-imagick \
 		php5-imap php5-intl php5-json php5-ldap php5-mongo php5-mysql php5-pgsql \
@@ -33,5 +35,8 @@ RUN ln -s ../../mods-available/php5-additional.ini /etc/php5/cli/conf.d/40-php5-
 
 COPY resources/bin/apache2-foreground /usr/local/bin/
 RUN chmod +x /usr/local/bin/apache2-foreground
+
+# setup workdir
+WORKDIR /var/www/html
 
 CMD ["apache2-foreground"]
